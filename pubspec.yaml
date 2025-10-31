@@ -10,7 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+    
+  excel: ^2.0.1
   # Firebase
   firebase_core: ^4.2.0
   firebase_auth: ^6.1.1
