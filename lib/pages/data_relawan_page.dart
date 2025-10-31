@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'form_relawan_page.dart';
-import 'package:excel/excel.dart';
+import 'package:excel/excel.dart' as xls;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -25,8 +25,8 @@ class _DataRelawanPageState extends State<DataRelawanPage> {
   Future<void> _eksporExcel() async {
     var status = await Permission.storage.request();
     if (status.isGranted) {
-      var excel = Excel.createExcel();
-      Sheet sheet = excel['Relawan'];
+      var excel = xls.Excel.createExcel();
+      xls.Sheet sheet = excel['Relawan'];
       sheet.appendRow(['Nama', 'Email', 'Telepon', 'Alamat']);
 
       QuerySnapshot snapshot = await _relawan.get();
