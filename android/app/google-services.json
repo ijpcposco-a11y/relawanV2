@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "596047235437",
+    "project_id": "relawan-e2f0d",
+    "storage_bucket": "relawan-e2f0d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596047235437:android:ec0a10ebe6dc118beb7264",
+        "android_client_info": {
+          "package_name": "com.example.pendataan_relawan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjU49D8_Q8Z3VNMsYIFo_wxFqoMwJzPmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
