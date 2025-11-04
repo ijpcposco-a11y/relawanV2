@@ -33,49 +33,49 @@ class _DataRelawanPageState extends State<DataRelawanPage> {
             .toList();
       });
     } catch (e) {
-      print('Error fetching relawan data: $e');
+      debugPrint('Error fetching relawan data: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Gagal mengambil data relawan')),
+        const SnackBar(content: Text('Gagal mengambil data relawan')),
       );
     }
   }
 
   Future<void> exportToExcel() async {
-  try {
-    var excel = Excel.createExcel();
-    var sheet = excel['Relawan'];
+    try {
+      var excel = Excel.createExcel();
+      var sheet = excel['Relawan'];
 
-    // Header
-    sheet.appendRow(['Nama', 'Email', 'No. HP', 'Alamat']);
+      // Header kolom
+      sheet.appendRow(['Nama', 'Email', 'No. HP', 'Alamat']);
 
-    // Data
-    for (var relawan in relawanList) {
-      sheet.appendRow([
-        relawan['nama'] ?? '',
-        relawan['email'] ?? '',
-        relawan['noHp'] ?? '',
-        relawan['alamat'] ?? '',
-      ]);
+      // Isi data
+      for (var relawan in relawanList) {
+        sheet.appendRow([
+          relawan['nama'] ?? '',
+          relawan['email'] ?? '',
+          relawan['noHp'] ?? '',
+          relawan['alamat'] ?? '',
+        ]);
+      }
+
+      // Simpan file ke folder dokumen aplikasi
+      Directory directory = await getApplicationDocumentsDirectory();
+      String filePath = '${directory.path}/data_relawan.xlsx';
+      File(filePath)
+        ..createSync(recursive: true)
+        ..writeAsBytesSync(excel.encode()!);
+
+      // Notifikasi ke pengguna
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('File berhasil disimpan di: $filePath')),
+      );
+    } catch (e) {
+      debugPrint('Error exporting Excel: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Gagal mengekspor data')),
+      );
     }
-
-    // Simpan file
-    Directory directory = await getApplicationDocumentsDirectory();
-    String filePath = '${directory.path}/data_relawan.xlsx';
-    File(filePath)
-      ..createSync(recursive: true)
-      ..writeAsBytesSync(excel.encode()!);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('File disimpan di: $filePath')),
-    );
-  } catch (e) {
-    print('Error exporting Excel: $e');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Gagal mengekspor data')),
-    );
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
